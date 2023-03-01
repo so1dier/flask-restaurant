@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
     <body>
+        with the dot
         {% for item in menu_items %}
-            <div id={{item['id']}} class="w3-container w3-white w3-padding-32">
-            <h1><b>{{item['name']}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">${{item['price']}}</span></h1>
-            <p class="w3-text-grey">Fresh tomatoes, fresh mozzarella, fresh basil</p>
+            <div id={{item.id}} class="w3-container w3-white w3-padding-32">
+            <h1><b>{{item.name}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">${{item.price}}</span></h1>
+            <p class="w3-text-grey">{{item.ingredients}}</p>
             <hr>
         {% endfor %}
     </body>
