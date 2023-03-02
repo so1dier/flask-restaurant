@@ -19,8 +19,6 @@ def index():
 
 @app.route('/menu')
 def menu():
-    #item_id = 'id_pizza'
-    #item_name = 'name_pizza'
     return render_template('menu.html', menu_items=menu_items)
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -34,6 +32,12 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@admin.com' and form.password.data == 'password':
+            flash(f'Login successful for {form.email.data}', 'success')
+            return redirect(url_for('menu'))
+        else:
+            flash('Login unsuccessful, please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
 
