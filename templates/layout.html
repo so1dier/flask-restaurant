@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>
+            This is all draft for now!
+        </title>
+    </head>
+        <body>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{category}}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}
+            {% endblock %}
+        </body>
+</html>

@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request
+from flask import flash, redirect, url_for
+from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = '24ba438773ab9e100d2a985fef34b506'
 
 menu_items = [
     {'id': 'id_pizza', 'name': 'name_pizza', 'price' :12.50, 'ingredients': 'mozarella, olives, dough'}, 
@@ -18,3 +22,20 @@ def menu():
     #item_id = 'id_pizza'
     #item_name = 'name_pizza'
     return render_template('menu.html', menu_items=menu_items)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.email.data}', 'success')
+        return redirect(url_for('menu'))
+    return render_template('register.html', title='Register', form=form)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    return render_template('login.html', title='Login', form=form)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

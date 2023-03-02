@@ -4,3 +4,5 @@ click
 black
 pytest-cov
 flask
+flask-wtf
+email-validator
